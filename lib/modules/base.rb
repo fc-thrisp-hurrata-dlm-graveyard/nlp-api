@@ -46,6 +46,17 @@ module Cleaver
       json :document => dpos
     end
 
+    # /c/document/entities
+    # extract some basic entities from the document
+    post '/document/entities' do
+      document = params[:document]
+      dperson = cleaver_person(document)
+      dorganization = cleaver_organization(document)
+      dplace = cleaver_location(document)
+      returned = {person:dperson, organization:dorganization, place:dplace}
+      json :document => returned
+    end
+
   end
 
 
